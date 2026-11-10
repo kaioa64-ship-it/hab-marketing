@@ -1,0 +1,136 @@
+{
+  "baseUrl": "https://pulso-pi-hazel.vercel.app",
+  "capturedAt": "2026-10-22T02:42:04.457Z",
+  "total": 16,
+  "successful": 16,
+  "items": [
+    {
+      "name": "01-estudio-cartaz-balcao",
+      "description": "Estúdio: Cartaz de Loja A4 (Modo Balcão - 3 Passos)",
+      "filename": "01-estudio-cartaz-balcao.png",
+      "filepath": "/home/kaio/Projetos/Gabarito/screenshots/01-estudio-cartaz-balcao.png",
+      "sizeKb": "647.8",
+      "status": "OK"
+    },
+    {
+      "name": "02-estudio-cartaz-gerente",
+      "description": "Estúdio: Cartaz de Loja (Modo Gerente - Governança Completa)",
+      "filename": "02-estudio-cartaz-gerente.png",
+      "filepath": "/home/kaio/Projetos/Gabarito/screenshots/02-estudio-cartaz-gerente.png",
+      "sizeKb": "715.4",
+      "status": "OK"
+    },
+    {
+      "name": "03-estudio-cartaz-lote",
+      "description": "Estúdio: Importação de Cartazes em Lote (Modo ERP / Tabela)",
+      "filename": "03-estudio-cartaz-lote.png",
+      "filepath": "/home/kaio/Projetos/Gabarito/screenshots/03-estudio-cartaz-lote.png",
+      "sizeKb": "655.7",
+      "status": "OK"
+    },
+    {
+      "name": "04-estudio-redes-sociais",
+      "description": "Estúdio: Gerador de Artes para Redes Sociais (Story/Feed)",
+      "filename": "04-estudio-redes-sociais.png",
+      "filepath": "/home/kaio/Projetos/Gabarito/screenshots/04-estudio-redes-sociais.png",
+      "sizeKb": "1046.5",
+      "status": "OK"
+    },
+    {
+      "name": "05-estudio-carrossel",
+      "description": "Estúdio: Construtor de Carrossel de Ofertas 4:5",
+      "filename": "05-estudio-carrossel.png",
+      "filepath": "/home/kaio/Projetos/Gabarito/screenshots/05-estudio-carrossel.png",
+      "sizeKb": "968.9",
+      "status": "OK"
+    },
+    {
+      "name": "06-estudio-rh-comunicados",
+      "description": "Estúdio: Murais de RH, Vagas e Comunicados de Segurança",
+      "filename": "06-estudio-rh-comunicados.png",
+      "filepath": "/home/kaio/Projetos/Gabarito/screenshots/06-estudio-rh-comunicados.png",
+      "sizeKb": "720.3",
+      "status": "OK"
+    },
+    {
+      "name": "07-configuracoes-identidade",
+      "description": "Configurações: Identidade da Marca (Logo, Cores, Departamentos)",
+      "filename": "07-configuracoes-identidade.png",
+      "filepath": "/home/kaio/Projetos/Gabarito/screenshots/07-configuracoes-identidade.png",
+      "sizeKb": "888.9",
+      "status": "OK"
+    },
+    {
+      "name": "08-configuracoes-regras",
+      "description": "Configurações: Regras Comerciais (Preços, Validade, CDC)",
+      "filename": "08-configuracoes-regras.png",
+      "filepath": "/home/kaio/Projetos/Gabarito/screenshots/08-configuracoes-regras.png",
+      "sizeKb": "452.7",
+      "status": "OK"
+    },
+    {
+      "name": "09-configuracoes-cartazes",
+      "description": "Configurações: Cartazes de Loja (Padrões de Impressão e Tema)",
+      "filename": "09-configuracoes-cartazes.png",
+      "filepath": "/home/kaio/Projetos/Gabarito/screenshots/09-configuracoes-cartazes.png",
+      "sizeKb": "510.0",
+      "status": "OK"
+    },
+    {
+      "name": "10-configuracoes-social",
+      "description": "Configurações: Redes Sociais (Proporção e Zonas Seguras)",
+      "filename": "10-configuracoes-social.png",
+      "filepath": "/home/kaio/Projetos/Gabarito/screenshots/10-configuracoes-social.png",
+      "sizeKb": "467.3",
+      "status": "OK"
+    },
+    {
+      "name": "11-configuracoes-erp",
+      "description": "Configurações: Base ERP (Catálogo e Sincronização)",
+      "filename": "11-configuracoes-erp.png",
+      "filepath": "/home/kaio/Projetos/Gabarito/screenshots/11-configuracoes-erp.png",
+      "sizeKb": "753.9",
+      "status": "OK"
+    },
+    {
+      "name": "12-configuracoes-acesso",
+      "description": "Configurações: Acesso e Interface (Visibilidade de Campos)",
+      "filename": "12-configuracoes-acesso.png",
+      "filepath": "/home/kaio/Projetos/Gabarito/screenshots/12-configuracoes-acesso.png",
+      "sizeKb": "544.8",
+      "status": "OK"
+    },
+    {
+      "name": "13-modal-ajuda-atalhos",
+      "description": "Modal: Painel de Atalhos de Teclado e Ajuda Rápida (Alt+H)",
+      "filename": "13-modal-ajuda-atalhos.png",
+      "filepath": "/home/kaio/Projetos/Gabarito/screenshots/13-modal-ajuda-atalhos.png",
+      "sizeKb": "805.6",
+      "status": "OK"
+    },
+    {
+      "name": "14-modal-captura-lead",
+      "description": "Modal: Captura de Lead para Liberação do Download Gratuito",
+      "filename": "14-modal-captura-lead.png",
+      "filepath": "/home/kaio/Projetos/Gabarito/screenshots/14-modal-captura-lead.png",
+      "sizeKb": "720.4",
+      "status": "OK"
+    },
+    {
+      "name": "15-modal-planos-upgrade",
+      "description": "Modal: Autovenda e Planos Pro (Balcão R$97 vs Governança R$197)",
+      "filename": "15-modal-planos-upgrade.png",
+      "filepath": "/home/kaio/Projetos/Gabarito/screenshots/15-modal-planos-upgrade.png",
+      "sizeKb": "889.8",
+      "status": "OK"
+    },
+    {
+      "name": "16-landing-page-apresentacao",
+      "description": "Landing Page: Apresentação Comercial do Gabarito Pro (#/apresentacao)",
+      "filename": "16-landing-page-apresentacao.png",
+      "filepath": "/home/kaio/Projetos/Gabarito/screenshots/16-landing-page-apresentacao.png",
+      "sizeKb": "1528.4",
+      "status": "OK"
+    }
+  ]
+}

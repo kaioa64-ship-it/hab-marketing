@@ -1,0 +1,408 @@
+{
+  "name": "Gabarito Pro — Máquina de Vendas 24/7",
+  "active": false,
+  "settings": {},
+  "id": "gabarito-agency-v1",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "gabarito-lead-captured",
+        "responseMode": "receivedNode",
+        "options": {}
+      },
+      "id": "webhook-lead-captured",
+      "name": "Webhook: gabarito:lead_captured",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [240, 200],
+      "webhookId": "gabarito-lead-captured"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{$json.branchCount}}",
+              "operation": "equals",
+              "value2": "1"
+            },
+            {
+              "value1": "={{$json.branchCount}}",
+              "operation": "equals",
+              "value2": "5+"
+            }
+          ]
+        }
+      },
+      "id": "router-branch-count",
+      "name": "Router: Nº de Lojas",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [460, 200]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "chave",
+              "value": "={{'GABARITO-PRO-' + Math.floor(10000 + Math.random() * 90000)}}"
+            },
+            {
+              "name": "loja",
+              "value": "={{$json.storeName}}"
+            },
+            {
+              "name": "whatsapp",
+              "value": "={{$json.whatsappOrEmail}}"
+            },
+            {
+              "name": "plano",
+              "value": "Balcão Pro — R$ 97/mês"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "gerar-chave-balcao",
+      "name": "Gerar Chave (Balcão)",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [700, 120]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "chave",
+              "value": "={{'GABARITO-PRO-' + Math.floor(10000 + Math.random() * 90000)}}"
+            },
+            {
+              "name": "loja",
+              "value": "={{$json.storeName}}"
+            },
+            {
+              "name": "whatsapp",
+              "value": "={{$json.whatsappOrEmail}}"
+            },
+            {
+              "name": "plano",
+              "value": "Governança de Rede — R$ 197/mês"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "gerar-chave-rede",
+      "name": "Gerar Chave (Rede)",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [700, 280]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "rede",
+              "value": "={{$json.storeName}}"
+            },
+            {
+              "name": "filiais",
+              "value": "={{$json.branchCount}}"
+            },
+            {
+              "name": "contato",
+              "value": "={{$json.whatsappOrEmail}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "alerta-peixe-grande",
+      "name": "Alerta Peixe Grande (5+)",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [700, 440]
+    },
+    {
+      "parameters": {
+        "resource": "text",
+        "text": "={{'Olá ' + $json.loja + '! Seu Gabarito Pro está ativo. 🗝️ Chave: ' + $json.chave + '\n\nPlano: ' + $json.plano + '\n\n👉 Baixe sua arte em 300 DPI agora: https://pulso-pi-hazel.vercel.app/#/estudio\n\nAtendimento: seu consultor de vendas via WhatsApp.'}}",
+        "options": {}
+      },
+      "id": "whatsapp-boas-vindas-balcao",
+      "name": "WhatsApp: Boas-vindas Balcão",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [920, 120]
+    },
+    {
+      "parameters": {
+        "resource": "text",
+        "text": "={{'Olá ' + $json.loja + '! Sua rede com ' + $json.filiais + ' lojas quer travar o Gabarito da marca no balcão. 🔒\n\nPlano: Governança de Rede (R$ 197/mês) — link dinâmico no WhatsApp comercial.\n\n👉 https://pulso-pi-hazel.vercel.app/#/estudio\n\nFale com nosso time para fechar.'}}",
+        "options": {}
+      },
+      "id": "whatsapp-boas-vindas-rede",
+      "name": "WhatsApp: Boas-vindas Rede",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [920, 280]
+    },
+    {
+      "parameters": {
+        "resource": "text",
+        "text": "={{'🚨 KAIO, PEIXE GRANDE DETECTADO!\n\nRede: ' + $json.rede + '\nLojas: ' + $json.filiais + '+\nContato: ' + $json.contato + '\n\nA rede acima testou o sistema Gabarito Pro. Clique aqui para mandar o áudio de fechamento:\nhttps://pulso-pi-hazel.vercel.app/#/estudio'}}",
+        "options": {}
+      },
+      "id": "whatsapp-alerta-kaio",
+      "name": "WhatsApp: Alerta Kaio (5+)",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [920, 440]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "gabarito-pagamento-confirmado",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook-pagamento",
+      "name": "Webhook: Pagamento Confirmado",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [240, 700],
+      "webhookId": "gabarito-pagamento-confirmado"
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "chave",
+              "value": "={{'GABARITO-PRO-' + Math.floor(10000 + Math.random() * 90000)}}"
+            },
+            {
+              "name": "cliente",
+              "value": "={{$json.customerName || $json.cliente}}"
+            },
+            {
+              "name": "whatsapp",
+              "value": "={{$json.customerPhone || $json.whatsapp}}"
+            },
+            {
+              "name": "email",
+              "value": "={{$json.customerEmail || $json.email}}"
+            },
+            {
+              "name": "plano",
+              "value": "={{$json.plan || $json.plano || 'Gabarito Pro'}}"
+            },
+            {
+              "name": "valor",
+              "value": "={{$json.amount || $json.valor || 'R$ 97,00'}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "gerar-chave-pagamento",
+      "name": "Gerar Chave Pós-Pagamento",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [460, 700]
+    },
+    {
+      "parameters": {
+        "resource": "text",
+        "text": "={{'✅ Pagamento confirmado! Obrigado, ' + $json.cliente + '.\n\n🗝️ Sua chave Gabarito Pro: ' + $json.chave + '\n📦 Plano: ' + $json.plano + '\n💰 Valor: ' + $json.valor + '\n\n👉 Acesse agora: https://pulso-pi-hazel.vercel.app/#/estudio\n\nSua chave está ativa. Baixe suas artes em 300 DPI.'}}",
+        "options": {}
+      },
+      "id": "whatsapp-entrega-chave",
+      "name": "WhatsApp: Entrega de Chave",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [700, 700]
+    },
+    {
+      "parameters": {
+        "to": "={{$json.email}}",
+        "subject": "Sua chave Gabarito Pro está ativa 🗝️",
+        "text": "={{'Olá ' + $json.cliente + ',\n\nSeu pagamento de ' + $json.valor + ' foi confirmado.\n\n🗝️ Chave: ' + $json.chave + '\n📦 Plano: ' + $json.plano + '\n\n👉 https://pulso-pi-hazel.vercel.app/#/estudio\n\nAcesse o estúdio e baixe suas artes em 300 DPI.\n\n— Gabarito Pro' }}",
+        "options": {}
+      },
+      "id": "email-entrega-chave",
+      "name": "Email: Entrega de Chave",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [700, 820]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "instanceId": "gabarito_whatsapp",
+        "resource": "message",
+        "resourceText": "={{$json.messageText}}",
+        "remoteJid": "={{$json.whatsapp + '@s.whatsapp.net'}}",
+        "options": {}
+      },
+      "id": "evolution-send-msg",
+      "name": "Evolution API: Enviar WhatsApp",
+      "type": "n8n-nodes-base.evolutionApi",
+      "typeVersion": 1,
+      "position": [1140, 200],
+      "credentials": {
+        "evolutionApiApi": {
+          "id": "evolution-api-gabarito"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook: gabarito:lead_captured": {
+      "main": [
+        [
+          {
+            "node": "Router: Nº de Lojas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Router: Nº de Lojas": {
+      "main": [
+        [
+          {
+            "node": "Gerar Chave (Balcão)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Gerar Chave (Rede)",
+            "type": "main",
+            "index": 1
+          }
+        ],
+        [
+          {
+            "node": "Alerta Peixe Grande (5+)",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Gerar Chave (Balcão)": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp: Boas-vindas Balcão",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gerar Chave (Rede)": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp: Boas-vindas Rede",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Alerta Peixe Grande (5+)": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp: Alerta Kaio (5+)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp: Boas-vindas Balcão": {
+      "main": [
+        [
+          {
+            "node": "Evolution API: Enviar WhatsApp",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp: Boas-vindas Rede": {
+      "main": [
+        [
+          {
+            "node": "Evolution API: Enviar WhatsApp",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp: Alerta Kaio (5+)": {
+      "main": [
+        [
+          {
+            "node": "Evolution API: Enviar WhatsApp",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook: Pagamento Confirmado": {
+      "main": [
+        [
+          {
+            "node": "Gerar Chave Pós-Pagamento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gerar Chave Pós-Pagamento": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp: Entrega de Chave",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Email: Entrega de Chave",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "WhatsApp: Entrega de Chave": {
+      "main": [
+        [
+          {
+            "node": "Evolution API: Enviar WhatsApp",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
