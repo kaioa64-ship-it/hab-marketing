@@ -130,16 +130,24 @@ export const Topbar: React.FC<TopbarProps> = ({
           type="button"
           className="top-profile"
           onClick={() => onOpenSettings('acesso')}
-          title="Preferências de acesso e filial"
+          title={`Perfil Ativo: ${
+            userRole === 'CURATOR_ADMIN'
+              ? 'Kaio Virgínio (Curador de Marketing)'
+              : userRole === 'STORE_MANAGER'
+                ? `Gerente de Filial (${activeStore.nome})`
+                : 'Operador de Balcão'
+          } • ${activeStore.gerenteEmail} (Clique para Preferências de Acesso)`}
         >
           <span
             className="profile-avatar"
             style={{ width: 24, height: 24, flexBasis: 24 }}
           >
-            {userRole === 'CURATOR_ADMIN' ? 'KV' : 'GE'}
+            {userRole === 'CURATOR_ADMIN' ? 'KV' : userRole === 'STORE_MANAGER' ? 'GE' : 'OP'}
           </span>
-          <span className="hidden sm:inline">
-            {userRole === 'CURATOR_ADMIN' ? 'Curador' : activeStore.cidade}
+          <span className="hidden sm:inline font-bold">
+            {userRole === 'CURATOR_ADMIN'
+              ? 'Kaio (Curador)'
+              : `${userRole === 'STORE_MANAGER' ? 'Gerente' : 'Balcão'} · ${activeStore.cidade}`}
           </span>
         </button>
       </div>

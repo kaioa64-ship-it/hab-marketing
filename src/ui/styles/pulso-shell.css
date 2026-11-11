@@ -150,7 +150,7 @@
   background: var(--paper);
 }
 
-.workspace-top { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.workspace-top { display: flex; align-items: flex-start; gap: 10px; min-width: 0; }
 
 .workspace-avatar {
   display: grid;
@@ -166,8 +166,17 @@
 }
 
 .workspace-copy { display: flex; flex: 1; min-width: 0; flex-direction: column; gap: 2px; }
-.workspace-copy strong { overflow: hidden; color: #20291f; font-size: 13.5px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
-.workspace-copy span { overflow: hidden; color: #677065; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+.workspace-copy strong {
+  display: -webkit-box;
+  overflow: hidden;
+  color: #20291f;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.25;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.workspace-copy span { overflow: hidden; color: #677065; font-size: 11.5px; text-overflow: ellipsis; white-space: nowrap; }
 
 .workspace-departments { display: flex; flex-wrap: wrap; gap: 5px; }
 
@@ -984,6 +993,172 @@
 
 .segmented--wide { display: flex; width: 100%; }
 .segmented--wide button { flex: 1; min-height: 38px; }
+
+/* ---------------------------------------------------------- Brand Hub Coagro */
+
+.brand-hub-page {
+  --coagro-blue: #002b49;
+  --coagro-royal: #001c71;
+  --coagro-green: #004d40;
+  --coagro-orange: #f28a16;
+  --coagro-gold: #ffab00;
+}
+
+.brand-hub-hero {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 43, 73, 0.07);
+}
+
+.brand-hub-hero::before {
+  position: absolute;
+  top: 0;
+  right: 28px;
+  width: 88px;
+  height: 4px;
+  background: var(--coagro-gold);
+  content: '';
+}
+
+.brand-hub-kicker {
+  display: inline-flex;
+  color: #65726f;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.brand-hub-status,
+.brand-hub-locked {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  border: 1px solid #d8e4dc;
+  border-radius: 999px;
+  background: #f4f8f4;
+  color: #2f6a3a;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.brand-hub-status { padding: 8px 10px; }
+.brand-hub-locked { padding: 6px 8px; color: var(--coagro-blue); background: #f2f6f8; border-color: #d6e2e9; }
+
+.brand-hub-tabs {
+  max-width: 100%;
+  background: #f4f6f5;
+}
+
+.brand-hub-tab {
+  min-height: 36px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.brand-hub-tab[aria-selected='true'] {
+  border-color: rgba(0, 77, 64, 0.18);
+  background: var(--coagro-green) !important;
+  color: #fff !important;
+}
+
+.brand-hub-panel,
+.brand-hub-template-card {
+  box-shadow: 0 8px 24px rgba(0, 43, 73, 0.05);
+}
+
+.brand-hub-template-card {
+  min-width: 0;
+}
+
+.brand-hub-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  color: #46545a;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.brand-hub-field > span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.brand-hub-field > span b {
+  color: #889592;
+  font-family: var(--font-mono, monospace);
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.brand-hub-field input {
+  width: 100%;
+  min-height: 38px;
+  padding: 0 10px;
+  border: 1px solid #d9e1df;
+  border-radius: 8px;
+  background: #fff;
+  color: #1e2d34;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.brand-hub-field input:focus {
+  border-color: var(--coagro-blue);
+  box-shadow: 0 0 0 3px rgba(0, 43, 73, 0.1);
+}
+
+.brand-hub-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 10px;
+  border: 1px dashed #b9c9c4;
+  border-radius: 9px;
+  background: #fbfcfb;
+  color: #52625f;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.brand-hub-upload input {
+  width: 100%;
+  color: #63716e;
+  font-size: 11px;
+}
+
+.brand-hub-action {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 12px;
+  border: 1px solid var(--coagro-green);
+  border-radius: 8px;
+  background: var(--coagro-green);
+  color: #fff;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.brand-hub-action:hover { background: #00382e; border-color: #00382e; }
+.brand-hub-action:active { transform: translateY(1px); }
+.brand-hub-action--muted { border-color: #d5dfdc; background: #f7faf8; color: var(--coagro-blue); }
+.brand-hub-action--muted:hover { border-color: #b9cbc4; background: #eef5f1; }
 
 /* ------------------------------------------------------------------ Toast */
 

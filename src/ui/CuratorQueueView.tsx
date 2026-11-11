@@ -158,7 +158,7 @@ export const CuratorQueueView: React.FC = () => {
             Fila Global de Demandas &amp; Homologação de Marca
           </h1>
           <p className="text-xs text-slate-500 mt-0.5">
-            Auditoria centralizada de peças das 15 unidades (Grupo Coagro, Coagro Pet e RB Agrícola), cotações gráficas e spots da Rádio Coagro.
+            Auditoria centralizada de peças das 15 Unidades Coagro (Grupo Coagro e Coagro Pet), cotações gráficas e spots da Rádio Coagro.
           </p>
         </div>
 

@@ -231,7 +231,7 @@ export const SpecialRequestsView: React.FC<SpecialRequestsViewProps> = ({ mode }
                 className="w-full rounded-2xl bg-[#004d40] border-4 border-[#ffab00] p-6 text-white flex flex-col justify-between relative overflow-hidden shadow-lg select-none"
               >
                 {/* Marca d'água de revisão */}
-                <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10 rotate-[-12deg] text-2xl font-black uppercase tracking-widest text-white">
+                <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-[0.045] rotate-[-12deg] text-2xl font-black uppercase tracking-widest text-white">
                   PREVIEW DE COTAÇÃO • {activeStore.nome}
                 </div>
 
@@ -282,6 +282,13 @@ export const SpecialRequestsView: React.FC<SpecialRequestsViewProps> = ({ mode }
     const next = exists
       ? radioSpotDraft.targetStoreIds.filter((id) => id !== storeId)
       : [...radioSpotDraft.targetStoreIds, storeId];
+
+    if (radioSpotDraft.mentionStoreName !== false) {
+      const nextMentionedStoreId = exists ? next[0] || activeStore.id : storeId;
+      studioActions.setActiveStore(nextMentionedStoreId);
+      return;
+    }
+
     studioActions.updateRadioSpotDraft({
       targetStoreIds: next.length > 0 ? next : [activeStore.id],
     });
@@ -411,6 +418,25 @@ export const SpecialRequestsView: React.FC<SpecialRequestsViewProps> = ({ mode }
               />
             </div>
 
+            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <label className="flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-800">
+                <input
+                  type="checkbox"
+                  checked={radioSpotDraft.mentionStoreName !== false}
+                  onChange={(e) => {
+                    studioActions.updateRadioSpotDraft({ mentionStoreName: e.target.checked });
+                  }}
+                  className="rounded border-slate-300 text-[#002B49] focus:ring-[#ffab00]"
+                />
+                <span>Mencionar o nome da minha loja no áudio?</span>
+              </label>
+              <p className="text-[11px] text-slate-500 mt-1 pl-6">
+                {radioSpotDraft.mentionStoreName !== false
+                  ? `Se ativado, a locução cita "Aqui na ${activeStore.nome}".`
+                  : 'Se desativado, a locução cita "todas as lojas do Grupo Coagro".'}
+              </p>
+            </div>
+
             <button
               type="button"
               onClick={() => {
@@ -427,7 +453,9 @@ export const SpecialRequestsView: React.FC<SpecialRequestsViewProps> = ({ mode }
                 Lojas Alvo no Spotifast Server (`target_stores`)
               </label>
               <div className="flex flex-wrap gap-1.5 max-h-28 overflow-y-auto p-2 rounded-xl bg-slate-50 border border-slate-200">
-                {COAGRO_STORES.filter((s) => s.tipo === 'filial').map((st) => {
+                {COAGRO_STORES.filter(
+                  (s) => s.tipo === 'filial' && s.ativo !== false && s.identityEnabled !== false
+                ).map((st) => {
                   const selected = radioSpotDraft.targetStoreIds.includes(st.id);
                   return (
                     <button
