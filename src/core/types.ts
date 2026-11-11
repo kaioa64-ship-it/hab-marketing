@@ -69,6 +69,7 @@ export type ModuleMode =
   | 'CAROUSEL'
   | 'HR_NOTICE'
   | 'BRAND_HUB'
+  | 'CAMPAIGNS'
   | 'CURATOR_QUEUE'
   | 'BANNER_FAIXA'
   | 'RADIO_SPOT';

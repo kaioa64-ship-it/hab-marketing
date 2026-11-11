@@ -95,6 +95,13 @@ const MODULE_META: Record<
     description: 'Medidas, mockup proporcional e envio para cotação gráfica.',
     caption: 'Mockup do material',
   },
+  CAMPAIGNS: {
+    label: 'Campanhas',
+    eyebrow: 'Campanhas da rede',
+    title: 'Campanhas e mídia oficial',
+    description: 'Pacotes sazonais, criativos, vídeos e spots homologados para as unidades.',
+    caption: 'Campanhas oficiais',
+  },
   RADIO_SPOT: {
     label: 'Rádio Coagro',
     eyebrow: 'Mídia interna',
@@ -546,8 +553,12 @@ export default function App() {
           />
         ) : activeModule === 'CURATOR_QUEUE' ? (
           <CuratorQueueView />
-        ) : activeModule === 'BRAND_HUB' ? (
-          <BrandHubView />
+        ) : activeModule === 'BRAND_HUB' || activeModule === 'CAMPAIGNS' ? (
+          <BrandHubView
+            key={activeModule}
+            initialTab={activeModule === 'CAMPAIGNS' ? 'campaigns' : 'team'}
+            campaignsMode={activeModule === 'CAMPAIGNS'}
+          />
         ) : activeModule === 'BANNER_FAIXA' || activeModule === 'RADIO_SPOT' ? (
           <SpecialRequestsView mode={activeModule} />
         ) : (

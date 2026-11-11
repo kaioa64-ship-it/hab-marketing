@@ -32,17 +32,10 @@ const MODULES: {
   badge?: string;
   icon: React.FC<{ size?: number }>;
 }[] = [
-  {
-    id: 'STORE_POSTER',
-    label: 'Cartazes de PDV',
-    badge: 'Via verde',
-    icon: IconPoster,
-  },
-  { id: 'BANNER_FAIXA', label: 'Faixas e lonas', badge: 'Cotação', icon: IconSparkles },
+  { id: 'BRAND_HUB', label: 'Kit Colaborador', icon: IconUsers },
+  { id: 'STORE_POSTER', label: 'Cartazes de PDV', badge: 'Via verde', icon: IconPoster },
   { id: 'SOCIAL_MEDIA', label: 'Anúncios da loja', icon: IconMegaphone },
   { id: 'CAROUSEL', label: 'Carrossel', icon: IconCarousel },
-  { id: 'BRAND_HUB', label: 'Kit Colaborador', icon: IconUsers },
-  { id: 'RADIO_SPOT', label: 'Rádio Coagro', icon: IconMegaphone },
   { id: 'HR_NOTICE', label: 'Comunicados', icon: IconUsers },
   { id: 'CURATOR_QUEUE', label: 'Fila do Curador', icon: IconShield },
 ];
@@ -152,6 +145,50 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       <p className="sidebar-label">Materiais e operação</p>
       <nav className="side-nav" aria-label="Menu principal">
+        <button
+          type="button"
+          className={`side-link side-link--campaigns${
+            activeModule === 'CAMPAIGNS' ||
+            activeModule === 'BANNER_FAIXA' ||
+            activeModule === 'RADIO_SPOT'
+              ? ' side-link--active'
+              : ''
+          }`}
+          aria-current={activeModule === 'CAMPAIGNS' ? 'page' : undefined}
+          onClick={() => select('CAMPAIGNS')}
+        >
+          <span className="flex items-center gap-2.5 truncate">
+            <IconSparkles size={16} />
+            <span className="truncate">Campanhas</span>
+          </span>
+          <span className="side-badge side-badge--gold">Oficial</span>
+        </button>
+
+        <div className="side-subnav" role="group" aria-label="Campanhas">
+          <button
+            type="button"
+            className={`side-link side-link--sub${
+              !isSettings && activeModule === 'BANNER_FAIXA' ? ' side-link--active' : ''
+            }`}
+            aria-current={activeModule === 'BANNER_FAIXA' ? 'page' : undefined}
+            onClick={() => select('BANNER_FAIXA')}
+          >
+            <span className="side-subtree-mark" aria-hidden="true" />
+            <span>Faixas e lonas</span>
+          </button>
+          <button
+            type="button"
+            className={`side-link side-link--sub${
+              !isSettings && activeModule === 'RADIO_SPOT' ? ' side-link--active' : ''
+            }`}
+            aria-current={activeModule === 'RADIO_SPOT' ? 'page' : undefined}
+            onClick={() => select('RADIO_SPOT')}
+          >
+            <span className="side-subtree-mark" aria-hidden="true" />
+            <span>Rádio Coagro</span>
+          </button>
+        </div>
+
         {MODULES.map(({ id, label, badge, icon: Icon }) => {
           const active = !isSettings && activeModule === id;
           const isQueue = id === 'CURATOR_QUEUE';

@@ -32,14 +32,22 @@ export type BrandHubTab =
   | 'directory'
   | 'campaigns';
 
-export const BrandHubView: React.FC = () => {
+interface BrandHubViewProps {
+  initialTab?: BrandHubTab;
+  campaignsMode?: boolean;
+}
+
+export const BrandHubView: React.FC<BrandHubViewProps> = ({
+  initialTab = 'team',
+  campaignsMode = false,
+}) => {
   const state = useStudioStore();
   const activeStore = getCoagroStoreById(state.activeStoreId);
   const isPet =
     state.brandKit.activeDepartmentId === 'dept-2' ||
     activeStore.bandeira === 'COAGRO_PET';
 
-  const [activeTab, setActiveTab] = useState<BrandHubTab>('campaigns');
+  const [activeTab, setActiveTab] = useState<BrandHubTab>(initialTab);
   const [selectedCampaignId, setSelectedCampaignId] = useState<string>('camp-saldao');
   const [notice, setNotice] = useState<string | null>(null);
 
@@ -72,7 +80,6 @@ export const BrandHubView: React.FC = () => {
   const [catalogSearch, setCatalogSearch] = useState('');
 
   const signatureRef = useRef<HTMLDivElement>(null);
-  const businessCardRef = useRef<HTMLDivElement>(null);
   const officialBusinessCardRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
@@ -241,27 +248,29 @@ export const BrandHubView: React.FC = () => {
       <div className="brand-hub-hero bg-white rounded-3xl p-6 border border-slate-200 shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div>
           <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#004d40] text-[#ffab00]">
-            Kit de marca
+            {campaignsMode ? 'Campanhas da rede' : 'Kit de marca'}
           </span>
           <h1 className="text-xl sm:text-2xl font-black text-slate-900 mt-1">
-            Marca, pessoas e materiais
+            {campaignsMode ? 'Campanhas e mídia oficial' : 'Marca, pessoas e materiais'}
           </h1>
           <p className="text-xs text-slate-500">
-            Perfil, assinatura, cartão, papelaria e ativos oficiais de {isPet ? 'Coagro Pet' : 'Grupo Coagro'}.
+            {campaignsMode
+              ? 'Pacotes sazonais, criativos, vídeos e spots homologados para as unidades.'
+              : `Perfil, assinatura, cartão, papelaria e ativos oficiais de ${isPet ? 'Coagro Pet' : 'Grupo Coagro'}.`}
           </p>
         </div>
 
-        <div className="brand-hub-tabs flex flex-wrap items-center gap-1.5 p-1.5 bg-slate-100 rounded-2xl border border-slate-200" role="tablist" aria-label="Categorias do Brand Hub">
-          {(
-            [
-              { id: 'campaigns', label: 'Campanhas' },
-              { id: 'team', label: 'Kit Colaborador' },
-              { id: 'identification', label: 'Crachá e cartão' },
-              { id: 'documents', label: 'Papel timbrado' },
-              { id: 'assets', label: 'Logos e paleta' },
-              { id: 'directory', label: 'Filiais e CNPJs' },
-            ] as const
-          ).map((t) => (
+        {!campaignsMode && (
+          <div className="brand-hub-tabs flex flex-wrap items-center gap-1.5 p-1.5 bg-slate-100 rounded-2xl border border-slate-200" role="tablist" aria-label="Categorias do Brand Hub">
+            {(
+              [
+                { id: 'team', label: 'Kit Colaborador' },
+                { id: 'identification', label: 'Crachá e cartão' },
+                { id: 'documents', label: 'Papel timbrado' },
+                { id: 'assets', label: 'Logos e paleta' },
+                { id: 'directory', label: 'Filiais e CNPJs' },
+              ] as const
+            ).map((t) => (
             <button
               key={t.id}
               type="button"
@@ -277,7 +286,8 @@ export const BrandHubView: React.FC = () => {
               {t.label}
             </button>
           ))}
-        </div>
+          </div>
+        )}
       </div>
 
       {/* ABA 1: KIT CORPORATIVO DE COLABORADORES */}
@@ -591,34 +601,6 @@ export const BrandHubView: React.FC = () => {
               A exportação usa o mesmo motor dos materiais do Hub, preservando margens e proporções.
             </p>
           </div>
-
-          {/* Prévia 3: Cartão de Visita Oficial */}
-          <div className="bg-white rounded-3xl p-5 border border-slate-200 space-y-3">
-            <div className="flex items-center justify-between">
-              <h3 className="text-xs font-black uppercase text-slate-800">
-                Prévia 3: Cartão de Visita (9×5cm)
-              </h3>
-              <button
-                type="button"
-                onClick={handleRequestPrintedCard}
-                className="px-3 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-500 text-slate-950 text-[11px] font-black cursor-pointer"
-              >
-                📨 Solicitar Impressão Gráfica
-              </button>
-            </div>
-
-            <CoagroBusinessCardTemplate
-              ref={businessCardRef}
-              activeStore={activeStore}
-              name={collabName}
-              role={collabRole}
-              department={collabDepartment}
-              registration={collabRegistration}
-              phone={collabPhone}
-              email={collabEmail}
-              photo={collabPhoto}
-            />
-          </div>
           </div>
         </div>
       )}
@@ -629,172 +611,124 @@ export const BrandHubView: React.FC = () => {
           <div className="brand-hub-panel rounded-3xl border border-slate-200 bg-white p-6">
             <div className="flex flex-col gap-2 border-b border-slate-100 pb-5 sm:flex-row sm:items-end sm:justify-between">
               <div>
-                <span className="brand-hub-kicker">LINHA DE IDENTIFICAÇÃO · MODELOS OFICIAIS</span>
+                <span className="brand-hub-kicker">Identificação oficial · modelos homologados</span>
                 <h2 className="mt-1 text-xl font-black tracking-tight text-slate-900">
-                  Crachá e cartão com composição travada
+                  Crachá e cartão
                 </h2>
                 <p className="mt-1 max-w-2xl text-xs leading-relaxed text-slate-500">
-                  O colaborador informa apenas seus dados. A marca controla proporção, hierarquia,
-                  cores, logo e áreas de respiro; nenhum elemento pode ser arrastado ou deformado.
+                  A composição é travada. Nome, cargo, foto e contatos vêm do Kit Colaborador,
+                  evitando cadastro duplicado.
                 </p>
               </div>
-              <span className="brand-hub-status">✓ 2 modelos homologados · Coagro v1</span>
+              <span className="brand-hub-status">2 modelos oficiais</span>
             </div>
 
-            <div className="mt-5 grid grid-cols-1 gap-5 xl:grid-cols-[minmax(250px,0.7fr)_minmax(0,1.3fr)]">
-              <div className="brand-hub-form-card space-y-3 rounded-2xl border border-slate-200 bg-slate-50/70 p-4">
-                <div>
-                  <span className="brand-hub-kicker">01 · DADOS EDITÁVEIS</span>
-                  <h3 className="mt-1 text-sm font-black text-slate-900">Identificação do colaborador</h3>
-                </div>
-
-                <label className="brand-hub-field">
-                  <span>Nome completo <b>42</b></span>
-                  <input
-                    type="text"
-                    value={collabName}
-                    maxLength={42}
-                    onChange={(e) => setCollabName(e.target.value)}
-                  />
-                </label>
-                <label className="brand-hub-field">
-                  <span>Cargo / função <b>36</b></span>
-                  <input
-                    type="text"
-                    value={collabRole}
-                    maxLength={36}
-                    onChange={(e) => setCollabRole(e.target.value)}
-                  />
-                </label>
-                <label className="brand-hub-field">
-                  <span>Setor / departamento <b>30</b></span>
-                  <input
-                    type="text"
-                    value={collabDepartment}
-                    maxLength={30}
-                    onChange={(e) => setCollabDepartment(e.target.value)}
-                  />
-                </label>
-                <label className="brand-hub-field">
-                  <span>Matrícula <b>16</b></span>
-                  <input
-                    type="text"
-                    value={collabRegistration}
-                    maxLength={16}
-                    onChange={(e) => setCollabRegistration(e.target.value)}
-                  />
-                </label>
-                <label className="brand-hub-field">
-                  <span>Telefone / WhatsApp <b>20</b></span>
-                  <input
-                    type="text"
-                    value={collabPhone}
-                    maxLength={20}
-                    onChange={(e) => setCollabPhone(e.target.value)}
-                  />
-                </label>
-                <label className="brand-hub-field">
-                  <span>E-mail corporativo <b>64</b></span>
-                  <input
-                    type="email"
-                    value={collabEmail}
-                    maxLength={64}
-                    onChange={(e) => setCollabEmail(e.target.value)}
-                  />
-                </label>
-                <label className="brand-hub-upload">
-                  <span>Foto opcional · recorte circular automático</span>
-                  <input type="file" accept="image/*" onChange={handlePhotoUpload} />
-                </label>
-                <p className="text-[11px] leading-relaxed text-slate-500">
-                  Campos com limite evitam quebra de linha no crachá e no cartão. A prévia é a mesma
-                  composição usada no arquivo exportado.
-                </p>
+            <div className="brand-hub-identity-summary mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="min-w-0">
+                <span className="brand-hub-kicker">Colaborador</span>
+                <strong className="mt-1 block truncate text-base font-black text-slate-900">
+                  {collabName}
+                </strong>
+                <span className="block truncate text-xs text-slate-500">
+                  {collabRole} · {collabDepartment}
+                </span>
               </div>
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-[11px] text-slate-500">
+                <span>Matrícula <strong className="font-mono text-slate-800">{collabRegistration}</strong></span>
+                <span>{collabPhone}</span>
+                <span className="hidden sm:inline">{collabEmail}</span>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('team')}
+                  className="brand-hub-action brand-hub-action--muted"
+                >
+                  Editar no Kit Colaborador
+                </button>
+              </div>
+            </div>
 
-              <div className="grid min-w-0 grid-cols-1 gap-5 2xl:grid-cols-[minmax(180px,0.72fr)_minmax(0,1.28fr)]">
-                <section className="brand-hub-template-card rounded-2xl border border-slate-200 bg-white p-4">
-                  <div className="mb-3 flex items-start justify-between gap-3">
-                    <div>
-                      <span className="brand-hub-kicker">MODELO 01 · VERTICAL</span>
-                      <h3 className="mt-1 text-sm font-black text-slate-900">Crachá corporativo</h3>
-                    </div>
-                    <span className="brand-hub-locked">TRAVADO</span>
+            <div className="mt-5 grid grid-cols-1 gap-5 xl:grid-cols-2">
+              <section className="brand-hub-template-card rounded-2xl border border-slate-200 bg-white p-4">
+                <div className="mb-3 flex items-start justify-between gap-3">
+                  <div>
+                    <span className="brand-hub-kicker">Modelo 01 · vertical</span>
+                    <h3 className="mt-1 text-sm font-black text-slate-900">Crachá corporativo</h3>
                   </div>
-                  <div className="flex justify-center">
-                    <CoagroBadgeTemplate
-                      ref={badgeRef}
-                      activeStore={activeStore}
-                      name={collabName}
-                      role={collabRole}
-                      department={collabDepartment}
-                      registration={collabRegistration}
-                      phone={collabPhone}
-                      email={collabEmail}
-                      photo={collabPhoto}
-                      isPet={isPet}
-                    />
+                  <span className="brand-hub-locked">Travado</span>
+                </div>
+                <div className="flex justify-center">
+                  <CoagroBadgeTemplate
+                    ref={badgeRef}
+                    activeStore={activeStore}
+                    name={collabName}
+                    role={collabRole}
+                    department={collabDepartment}
+                    registration={collabRegistration}
+                    phone={collabPhone}
+                    email={collabEmail}
+                    photo={collabPhoto}
+                    isPet={isPet}
+                  />
+                </div>
+                <button
+                  type="button"
+                  onClick={() =>
+                    exportElementToPng(
+                      badgeRef.current,
+                      `cracha-${collabName.toLowerCase().replace(/\s+/g, '-') || 'coagro'}.png`,
+                      1200
+                    )
+                  }
+                  className="brand-hub-action mt-4 w-full"
+                >
+                  ↓ Baixar crachá PNG
+                </button>
+              </section>
+
+              <section className="brand-hub-template-card rounded-2xl border border-slate-200 bg-white p-4">
+                <div className="mb-3 flex items-start justify-between gap-3">
+                  <div>
+                    <span className="brand-hub-kicker">Modelo 02 · 9 × 5 cm</span>
+                    <h3 className="mt-1 text-sm font-black text-slate-900">Cartão de visita oficial</h3>
                   </div>
+                  <span className="brand-hub-locked">Travado</span>
+                </div>
+                <div className="flex min-h-[230px] items-center justify-center rounded-xl bg-[#f3f6f7] p-4">
+                  <CoagroBusinessCardTemplate
+                    ref={officialBusinessCardRef}
+                    activeStore={activeStore}
+                    name={collabName}
+                    role={collabRole}
+                    department={collabDepartment}
+                    registration={collabRegistration}
+                    phone={collabPhone}
+                    email={collabEmail}
+                    photo={collabPhoto}
+                  />
+                </div>
+                <div className="mt-3 flex flex-wrap gap-2">
                   <button
                     type="button"
                     onClick={() =>
                       exportElementToPng(
-                        badgeRef.current,
-                        `cracha-${collabName.toLowerCase().replace(/\s+/g, '-') || 'coagro'}.png`,
+                        officialBusinessCardRef.current,
+                        `cartao-${collabName.toLowerCase().replace(/\s+/g, '-') || 'coagro'}.png`,
                         1200
                       )
                     }
-                    className="brand-hub-action mt-4 w-full"
+                    className="brand-hub-action flex-1"
                   >
-                    ↓ Baixar crachá PNG
+                    ↓ Baixar cartão PNG
                   </button>
-                </section>
-
-                <section className="brand-hub-template-card rounded-2xl border border-slate-200 bg-white p-4">
-                  <div className="mb-3 flex items-start justify-between gap-3">
-                    <div>
-                      <span className="brand-hub-kicker">MODELO 02 · 9 × 5 CM</span>
-                      <h3 className="mt-1 text-sm font-black text-slate-900">Cartão de visita oficial</h3>
-                    </div>
-                    <span className="brand-hub-locked">TRAVADO</span>
-                  </div>
-                  <div className="flex min-h-[210px] items-center justify-center rounded-xl bg-[#f3f5f4] p-4">
-                    <CoagroBusinessCardTemplate
-                      ref={officialBusinessCardRef}
-                      activeStore={activeStore}
-                      name={collabName}
-                      role={collabRole}
-                      department={collabDepartment}
-                      registration={collabRegistration}
-                      phone={collabPhone}
-                      email={collabEmail}
-                      photo={collabPhoto}
-                    />
-                  </div>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    <button
-                      type="button"
-                      onClick={() =>
-                        exportElementToPng(
-                          officialBusinessCardRef.current,
-                          `cartao-${collabName.toLowerCase().replace(/\s+/g, '-') || 'coagro'}.png`,
-                          1200
-                        )
-                      }
-                      className="brand-hub-action flex-1"
-                    >
-                      ↓ Baixar cartão PNG
-                    </button>
-                    <button
-                      type="button"
-                      onClick={handleRequestPrintedCard}
-                      className="brand-hub-action brand-hub-action--muted flex-1"
-                    >
-                      📨 Solicitar gráfica
-                    </button>
-                  </div>
-                </section>
-              </div>
+                  <button
+                    type="button"
+                    onClick={handleRequestPrintedCard}
+                    className="brand-hub-action brand-hub-action--muted flex-1"
+                  >
+                    📨 Solicitar gráfica
+                  </button>
+                </div>
+              </section>
             </div>
           </div>
         </div>

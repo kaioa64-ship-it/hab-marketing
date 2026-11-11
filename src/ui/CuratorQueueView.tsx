@@ -46,6 +46,7 @@ const MODULE_LABELS: Record<ModuleMode, string> = {
   BANNER_FAIXA: 'Faixa / Lona / Gráfica',
   RADIO_SPOT: 'Spot Rádio Coagro',
   BRAND_HUB: 'Kit Corporativo / Marca',
+  CAMPAIGNS: 'Campanha / Mídia Oficial',
   CURATOR_QUEUE: 'Fila do Curador',
 };
 

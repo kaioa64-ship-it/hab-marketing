@@ -4,6 +4,21 @@ Todas as alterações relevantes, decisões técnicas e novas funcionalidades do
 
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
+## [3.13.0-coagro-navigation] - 2026-11-11
+
+### Alterado
+- **NAV-01 (Campanhas como eixo principal):** criado o módulo `CAMPAIGNS` e movido o conteúdo de campanhas para uma página própria reutilizando o motor do Brand Hub, sem duplicar templates ou lógica.
+- **NAV-02 (Faixas e Rádio como submenus):** `Faixas e lonas` saiu do menu principal e passou para o submenu de Campanhas; `Rádio Coagro` também foi agrupado como mídia secundária.
+- **NAV-03 (Kit Colaborador em destaque):** Kit Colaborador passou a ser o primeiro item operacional abaixo de Campanhas e a primeira aba do Brand Hub, herdando o espaço que era ocupado por Campanhas.
+- **UX-DUP-01 (Fim da duplicação de cartão):** removida a prévia de cartão de visita do Kit Colaborador; o cartão existe somente na aba `Crachá e cartão`.
+- **UX-DUP-02 (Formulário único):** removido o formulário duplicado da aba `Crachá e cartão`; a aba agora lê os dados do Kit Colaborador e oferece `Editar no Kit Colaborador`.
+
+### Validado
+- `npx tsc --noEmit`.
+- `npm test`: 39/39.
+- `npx vite build`.
+- Teste de navegação desktop/mobile: Campanhas, Faixas, Rádio, Kit, edição compartilhada, zero overflow e zero erros de página.
+
 ## [3.12.0-agent-browser-skill] - 2026-11-11
 
 ### Adicionado
