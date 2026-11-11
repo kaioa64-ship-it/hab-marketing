@@ -4,6 +4,12 @@ Todas as alterações relevantes, decisões técnicas e novas funcionalidades do
 
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
+## [3.10.0-coagro-frontend-design-skill] - 2026-11-11
+
+### Adicionado
+- **DOCS-SKILL-01 (Skill Frontend Design):** criado `.opencode/skills/frontend-design/SKILL.md` com o processo de direção visual, princípios de tipografia, cor, layout, movimento e escrita.
+- **DOCS-SKILL-02 (Brief específico do Hub Coagro):** criado `.opencode/skills/frontend-design/references/coagro-hub.md` com tokens, metáfora da mesa de prova, assinatura visual, anti-padrões e prioridades de redesenho.
+
 ## [3.9.1-coagro-badge-official] - 2026-11-11
 
 ### Alterado
