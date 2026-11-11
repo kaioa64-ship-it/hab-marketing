@@ -241,25 +241,25 @@ export const BrandHubView: React.FC = () => {
       <div className="brand-hub-hero bg-white rounded-3xl p-6 border border-slate-200 shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div>
           <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#004d40] text-[#ffab00]">
-            Brand Hub &amp; Kit Corporativo • {activeStore.nome}
+            Kit de marca
           </span>
           <h1 className="text-xl sm:text-2xl font-black text-slate-900 mt-1">
-            Central de Padronização Institucional ({isPet ? 'Coagro Pet' : 'Grupo Coagro'})
+            Marca, pessoas e materiais
           </h1>
           <p className="text-xs text-slate-500">
-            Assinaturas de e-mail, cartões de visita, avatar de WhatsApp, papel timbrado A4, vetores e diretório das 15 unidades.
+            Perfil, assinatura, cartão, papelaria e ativos oficiais de {isPet ? 'Coagro Pet' : 'Grupo Coagro'}.
           </p>
         </div>
 
         <div className="brand-hub-tabs flex flex-wrap items-center gap-1.5 p-1.5 bg-slate-100 rounded-2xl border border-slate-200" role="tablist" aria-label="Categorias do Brand Hub">
           {(
             [
-              { id: 'campaigns', label: '📦 Campanhas Oficiais & Media Library' },
-              { id: 'team', label: '🪪 Kit Colaborador' },
-              { id: 'identification', label: '🪪 Crachá & Cartão Oficial' },
-              { id: 'documents', label: '📄 Papel Timbrado A4' },
-              { id: 'assets', label: '🎨 Logos & Paleta Oficial' },
-              { id: 'directory', label: '🏬 Filiais & CNPJs' },
+              { id: 'campaigns', label: 'Campanhas' },
+              { id: 'team', label: 'Kit Colaborador' },
+              { id: 'identification', label: 'Crachá e cartão' },
+              { id: 'documents', label: 'Papel timbrado' },
+              { id: 'assets', label: 'Logos e paleta' },
+              { id: 'directory', label: 'Filiais e CNPJs' },
             ] as const
           ).map((t) => (
             <button
@@ -286,7 +286,7 @@ export const BrandHubView: React.FC = () => {
           {/* Formulário Guiado */}
           <div className="lg:col-span-5 bg-white rounded-3xl p-5 border border-slate-200 space-y-4">
             <h2 className="text-sm font-black uppercase tracking-wide text-slate-900 border-b border-slate-100 pb-2.5">
-              1. Dados do Colaborador
+              Dados do colaborador
             </h2>
 
             <div className="space-y-3">

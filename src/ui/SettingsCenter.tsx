@@ -107,7 +107,7 @@ export const SettingsCenter: React.FC<SettingsCenterProps> = ({
       <div className="settings-header">
         <div>
           <div className="eyebrow">
-            <span className="eyebrow-line" /> CENTRAL DE CONFIGURAÇÕES
+            <span className="eyebrow-line" /> Painel de configurações
           </div>
           <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
             Central de Configurações

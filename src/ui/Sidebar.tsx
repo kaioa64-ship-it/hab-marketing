@@ -2,7 +2,7 @@ import React from 'react';
 import { useStudioStore, studioActions } from '../core/store';
 import { COAGRO_HUB_BRAND, type ModuleMode } from '../core/types';
 import { COAGRO_STORES, getCoagroStoreById } from '../core/coagroStores';
-import { LogoHorizontalAzul, CoagroSimboloCasinha } from './coagroLogos';
+import { LogoHorizontalBranca, CoagroSimboloCasinha } from './coagroLogos';
 import {
   IconCarousel,
   IconMegaphone,
@@ -32,14 +32,19 @@ const MODULES: {
   badge?: string;
   icon: React.FC<{ size?: number }>;
 }[] = [
-  { id: 'STORE_POSTER', label: '1. Cartazes de PDV', badge: 'Via Verde', icon: IconPoster },
-  { id: 'BANNER_FAIXA', label: '2. Faixas & Lonas', badge: 'Cotação', icon: IconSparkles },
-  { id: 'SOCIAL_MEDIA', label: '3. Anúncios Loja (Zap)', icon: IconMegaphone },
-  { id: 'CAROUSEL', label: '4. Carrossel de Ofertas', icon: IconCarousel },
-  { id: 'BRAND_HUB', label: '5. Kit Colaborador & Marca', icon: IconUsers },
-  { id: 'RADIO_SPOT', label: '6. Rádio Coagro (:8790)', icon: IconMegaphone },
-  { id: 'HR_NOTICE', label: '7. Comunicados & Mural A4', icon: IconUsers },
-  { id: 'CURATOR_QUEUE', label: 'Fila do Curador (Kaio)', icon: IconShield },
+  {
+    id: 'STORE_POSTER',
+    label: 'Cartazes de PDV',
+    badge: 'Via verde',
+    icon: IconPoster,
+  },
+  { id: 'BANNER_FAIXA', label: 'Faixas e lonas', badge: 'Cotação', icon: IconSparkles },
+  { id: 'SOCIAL_MEDIA', label: 'Anúncios da loja', icon: IconMegaphone },
+  { id: 'CAROUSEL', label: 'Carrossel', icon: IconCarousel },
+  { id: 'BRAND_HUB', label: 'Kit Colaborador', icon: IconUsers },
+  { id: 'RADIO_SPOT', label: 'Rádio Coagro', icon: IconMegaphone },
+  { id: 'HR_NOTICE', label: 'Comunicados', icon: IconUsers },
+  { id: 'CURATOR_QUEUE', label: 'Fila do Curador', icon: IconShield },
 ];
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -75,14 +80,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
         onClick={() => select('STORE_POSTER')}
         aria-label={`Ir para o ${COAGRO_HUB_BRAND.name}`}
       >
-        <LogoHorizontalAzul className="h-9 w-auto max-w-[186px]" />
+        <LogoHorizontalBranca className="h-10 w-auto max-w-[196px]" />
       </button>
 
-      <p className="sidebar-label">NOSSAS UNIDADES · FILIAL ATIVA</p>
+      <p className="sidebar-label">Unidade ativa</p>
 
       <div className="workspace-card space-y-2.5">
         <div className="workspace-top">
-          <span className="workspace-avatar bg-[#004d40] text-[#ffab00]" aria-hidden="true">
+          <span className="workspace-avatar" aria-hidden="true">
             <CoagroSimboloCasinha className="w-5 h-5" />
           </span>
           <span className="workspace-copy">
@@ -101,7 +106,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             id="sidebar-store-select"
             value={activeStoreId}
             onChange={(e) => studioActions.setActiveStore(e.target.value)}
-            className="w-full rounded-lg bg-white border border-slate-200 text-slate-800 px-2.5 py-1.5 text-[11px] font-bold cursor-pointer focus:outline-none focus:border-[#002B49]"
+            className="workspace-select"
           >
             {COAGRO_STORES.filter(
               (st) => st.ativo !== false && st.identityEnabled !== false && st.bandeira !== 'RB_AGRICOLA'
@@ -145,7 +150,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         )}
       </div>
 
-      <p className="sidebar-label">MÓDULOS DO HUB COAGRO</p>
+      <p className="sidebar-label">Materiais e operação</p>
       <nav className="side-nav" aria-label="Menu principal">
         {MODULES.map(({ id, label, badge, icon: Icon }) => {
           const active = !isSettings && activeModule === id;
@@ -163,13 +168,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <span className="truncate">{label}</span>
               </span>
               {isQueue && pendingRequestsCount > 0 ? (
-                <span className="px-1.5 py-0.5 rounded-full bg-[#ffab00] text-slate-950 text-[10px] font-black shrink-0">
-                  {pendingRequestsCount}
-                </span>
+                <span className="side-count">{pendingRequestsCount}</span>
               ) : badge ? (
-                <span className="px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 text-[9px] font-bold uppercase shrink-0">
-                  {badge}
-                </span>
+                <span className="side-badge">{badge}</span>
               ) : null}
             </button>
           );
@@ -185,7 +186,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           }}
         >
           <IconSettings size={16} />
-          <span>Configurações &amp; Base ERP</span>
+          <span>Configurações</span>
           {isSettings && <i aria-hidden="true" />}
         </button>
       </nav>
@@ -198,7 +199,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         >
           <div className="freemium-top">
             <span className="free-dot" aria-hidden="true" />
-            GOVERNANÇA DETERMINÍSTICA
+            Governança ativa
           </div>
           <div className="freemium-count">
             <strong>{pendingRequestsCount}</strong>
@@ -209,7 +210,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </span>
           </div>
           <p>
-            Identidade travada (#002B49 / #004d40 / #ffab00). Zero alucinação de IA generativa.
+            Identidade oficial Coagro e Coagro Pet. Peças fora do padrão entram na fila de curadoria.
           </p>
           <button
             type="button"

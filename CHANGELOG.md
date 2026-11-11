@@ -4,6 +4,21 @@ Todas as alterações relevantes, decisões técnicas e novas funcionalidades do
 
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
+## [3.11.0-coagro-mesa-de-prova] - 2026-11-11
+
+### Alterado
+- **DESIGN-01 (Mesa de prova Coagro):** reconstruída a camada visual global em `src/ui/styles/pulso-shell.css` com azul cobalto institucional, papel frio, malha técnica discreta, cantos de produção, tipografia Exo 2/Inter, foco dourado e sombras reservadas à prévia física.
+- **DESIGN-02 (Navegação e contexto):** `src/ui/Sidebar.tsx` virou um índice de produção azul com logo branca, unidade ativa, seções em caixa de frase e sem numeração artificial; `src/ui/Topbar.tsx` recebeu seletor de perfil compacto e legível.
+- **DESIGN-03 (Estúdio e prévia):** `src/App.tsx` ganhou cabeçalho editorial com descrição real do módulo, removeu o marcador de etapa isolado, encurtou os metadados e deu à prévia um palco de mesa de corte com réguas, papel e cantoneiras.
+- **DESIGN-04 (Brand Hub, Curadoria, Faixas e Landing):** Brand Hub ganhou capa cobalto, abas de materiais e fichas de produção; a Fila do Curador virou bandeja contínua de KPIs; Faixas & Lonas ganharam palco de mockup; a landing executiva foi alinhada à mesma família visual clara.
+- **DESIGN-05 (Tipografia de interface):** labels operacionais passaram a caixa de frase, títulos de seção usam Exo 2 e a leitura de dados usa Inter com contraste e tabular numbers.
+
+### Validado
+- `npx tsc --noEmit`: sem erros.
+- `npm test`: 39/39 testes aprovados.
+- `npx vite build`: concluído.
+- Revisão visual em desktop e mobile, sem overflow horizontal.
+
 ## [3.10.0-coagro-frontend-design-skill] - 2026-11-11
 
 ### Adicionado

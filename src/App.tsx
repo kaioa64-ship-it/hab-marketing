@@ -61,60 +61,60 @@ const MODULE_META: Record<
   { label: string; eyebrow: string; title: string; description: string; caption: string }
 > = {
   SOCIAL_MEDIA: {
-    label: '3. Anúncios da Loja (WhatsApp / Feed)',
-    eyebrow: 'COMUNICAÇÃO DIGITAL • VIA AMARELA',
-    title: 'Anúncios Personalizados da Loja',
-    description: 'Stories (9:16) e Feed (4:5) com identidade travada Coagro.',
-    caption: 'Prévia da arte social',
+    label: 'Anúncios da loja',
+    eyebrow: 'Comunicação digital',
+    title: 'Anúncios para WhatsApp e redes',
+    description: 'Stories e feed com identidade Coagro, preço conferido e aprovação de marketing.',
+    caption: 'Anúncio da loja',
   },
   STORE_POSTER: {
-    label: '1. Cartazes de PDV (Individual & Lote)',
-    eyebrow: 'PONTO DE VENDA • VIA VERDE',
-    title: 'Cartazes de Loja Coagro',
-    description: 'Impressão A4, Meia-Folha A5 e Etiquetas de Gôndola 2×2.',
-    caption: 'Prévia da folha de impressão',
+    label: 'Cartazes de PDV',
+    eyebrow: 'Ponto de venda',
+    title: 'Cartazes e etiquetas de gôndola',
+    description: 'Impressão em A4, meia-folha A5 e etiquetas 2×2 com preço e vigência conferidos.',
+    caption: 'Folha de impressão',
   },
   CAROUSEL: {
-    label: '4. Carrossel de Ofertas',
-    eyebrow: 'SEQUÊNCIA DE OFERTAS • VIA AMARELA',
-    title: 'Carrossel Guiado Coagro',
-    description: 'Sequência de slides 4:5 com capa, produtos e chamada final.',
-    caption: 'Prévia do slide ativo',
+    label: 'Carrossel',
+    eyebrow: 'Sequência de ofertas',
+    title: 'Carrossel de ofertas',
+    description: 'Capa, ofertas e chamada final em uma sequência pronta para publicar.',
+    caption: 'Slide ativo',
   },
   HR_NOTICE: {
-    label: '7. Comunicados & Mural A4',
-    eyebrow: 'COMUNICAÇÃO INTERNA • VIA VERDE',
-    title: 'RH, Vagas & Comunicados de Filial',
-    description: 'Vagas, avisos operacionais e normas de segurança NR-06/NR-31.',
-    caption: 'Prévia do comunicado',
+    label: 'Comunicados',
+    eyebrow: 'Comunicação interna',
+    title: 'Comunicados e mural',
+    description: 'Vagas, avisos e segurança em material de mural ou card interno.',
+    caption: 'Comunicado',
   },
   BANNER_FAIXA: {
-    label: '2. Faixas, Banners & Lonas',
-    eyebrow: 'GRANDE FORMATO • COTAÇÃO GRÁFICA',
-    title: 'Faixas de Rua, Banners e Lonas de Fachada',
-    description: 'Mockup proporcional travado e encaminhamento para cotação gráfica.',
-    caption: 'Mockup proporcional da lona/faixa',
+    label: 'Faixas e lonas',
+    eyebrow: 'Grande formato',
+    title: 'Faixas, banners e lonas',
+    description: 'Medidas, mockup proporcional e envio para cotação gráfica.',
+    caption: 'Mockup do material',
   },
   RADIO_SPOT: {
-    label: '6. Anúncios Rádio Coagro (:8790)',
-    eyebrow: 'MÍDIA INDOOR • SPOTIFAST SERVER',
-    title: 'Solicitação de Spots para Rádio Interna',
-    description: 'Roteiros de 15s e 30s integrados à grade musical das lojas (2 músicas : 1 comercial).',
-    caption: 'Teleprompter da Rádio Coagro',
+    label: 'Rádio Coagro',
+    eyebrow: 'Mídia interna',
+    title: 'Rádio Coagro',
+    description: 'Roteiros de 15 e 30 segundos para o som ambiente das lojas.',
+    caption: 'Roteiro de locução',
   },
   BRAND_HUB: {
-    label: '5. Kit Colaborador & Brand Hub',
-    eyebrow: 'PADRONIZAÇÃO INSTITUCIONAL',
-    title: 'Brand Hub, Kit Colaborador & 15 Unidades',
-    description: 'Assinaturas de e-mail, cartões de visita, papel timbrado A4, vetores SVG e CNPJs.',
-    caption: 'Ativos oficiais do Grupo Coagro',
+    label: 'Kit Colaborador',
+    eyebrow: 'Identidade e materiais',
+    title: 'Kit Colaborador e Marca',
+    description: 'Perfil, assinatura, cartão, papelaria e ativos oficiais do Grupo Coagro.',
+    caption: 'Materiais de identidade',
   },
   CURATOR_QUEUE: {
-    label: 'Fila do Curador (Kaio)',
-    eyebrow: 'GOVERNANÇA CENTRALIZADA • MARKETING',
-    title: 'Painel de Curadoria & Dicionário Corporativo Agro',
-    description: 'Homologação em 1 clique, revisão ortográfica Camada 2 e liberação de arquivos.',
-    caption: 'Fila global de solicitações',
+    label: 'Fila do Curador',
+    eyebrow: 'Curadoria central',
+    title: 'Fila de homologação',
+    description: 'Validação de peças, ortografia e materiais gráficos das unidades.',
+    caption: 'Fila de homologação',
   },
 };
 
@@ -554,12 +554,15 @@ export default function App() {
           <div className="page-wrap">
             <section className="studio-section">
               <div className="studio-section-heading">
-                <div>
+                <div className="workboard-heading">
                   <div className="eyebrow eyebrow--compact">
                     <span className="eyebrow-line" />
                     {MODULE_META[activeModule].eyebrow}
                   </div>
-                  <h2>{MODULE_META[activeModule].label}</h2>
+                  <h1>{MODULE_META[activeModule].label}</h1>
+                  <p className="workboard-description">
+                    {MODULE_META[activeModule].description}
+                  </p>
                 </div>
               </div>
 
@@ -1339,16 +1342,15 @@ export default function App() {
             /* FORMULÁRIO INDIVIDUAL COM FLUXO ERGONÔMICO DE 10 SEGUNDOS */
             <div className="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 space-y-4">
               <div className="editor-header">
-                <div className="step-number">01</div>
                 <div className="editor-header-copy">
                   <span>
-                    CONFIGURE SUA CAMPANHA · ID #{metrics.forensicId}
-                    <HelpHint text="Código único gerado matematicamente a partir do produto, preço e validade para auditoria contra divergência de gôndola." />
+                    Dados da oferta · ID {metrics.forensicId}
+                    <HelpHint text="Código único gerado a partir do produto, preço e validade para auditoria contra divergência de gôndola." />
                   </span>
                   <h2>
                     {activeModule === 'STORE_POSTER'
-                      ? 'Informações do Cartaz'
-                      : 'Criação Manual de Arte'}
+                      ? 'Informações do cartaz'
+                      : 'Criar anúncio'}
                   </h2>
                 </div>
 
@@ -2322,9 +2324,9 @@ export default function App() {
                 <span className="preview-title-mark">
                   <IconEye size={12} />
                 </span>
-                <strong>PRÉ-VISUALIZAÇÃO</strong>
+                <strong>Prévia</strong>
                 <span className="preview-live">
-                  <i aria-hidden="true" /> AO VIVO
+                  <i aria-hidden="true" /> atualiza ao vivo
                 </span>
               </div>
               <div className="preview-meta">
