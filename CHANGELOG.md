@@ -4,6 +4,13 @@ Todas as alterações relevantes, decisões técnicas e novas funcionalidades do
 
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
+## [3.12.0-agent-browser-skill] - 2026-11-11
+
+### Adicionado
+- **DOCS-SKILL-03 (Agent Browser):** instalada a habilidade `agent-browser` via `npx skills add https://github.com/vercel-labs/agent-browser --skill agent-browser` em `.agents/skills/agent-browser`.
+- **DOCS-SKILL-04 (Lockfile de skills):** criado `skills-lock.json` para restaurar a habilidade com `npx skills experimental_install`.
+- **CHORE-ASSETS (Referências locais):** `marca e ideias/` excluída do Git; os logos de produção permanecem embutidos em `src/ui/coagroLogos.tsx`, sem dependência do diretório local de referências.
+
 ## [3.11.0-coagro-mesa-de-prova] - 2026-11-11
 
 ### Alterado

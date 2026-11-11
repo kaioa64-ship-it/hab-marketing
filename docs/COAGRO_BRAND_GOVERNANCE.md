@@ -19,6 +19,10 @@ exportação local e contratos DOM de auditoria. O principal débito está na ca
 
 ## 2. Referências analisadas
 
+> A pasta local `marca e ideias/` contém material bruto e referências de terceiros;
+> ela não é versionada. Os ativos usados em produção são os SVGs embutidos em
+> `src/ui/coagroLogos.tsx`, portanto o build não depende dessa pasta.
+
 ### Manual de marca local
 
 O manual em `marca e ideias/MANUAL DE MARCA COAGRO (1).pdf` confirma:
